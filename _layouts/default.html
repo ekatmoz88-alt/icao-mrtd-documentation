@@ -21,9 +21,33 @@
       margin: 20px auto;
       max-width: 100%;
     }
+    /* Navigation panel styles */
+    .nav-panel {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px 20px;
+      margin-bottom: 24px;
+      font-size: 0.875rem;
+    }
+    .nav-panel a {
+      color: #2d3748;
+      text-decoration: none;
+      margin-right: 16px;
+    }
+    .nav-panel a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
+  <!-- Navigation panel -->
+  <div class="nav-panel">
+    <a href="./">Главная ↗</a>
+    <a href="SPECIFICATION.html">SPECIFICATION ↗</a>
+    <a href="ARCHITECTURE_DIAGRAMS.html">Диаграммы ↗</a>
+  </div>
+
   <div class="content">
     {{ content }}
   </div>
@@ -32,13 +56,17 @@
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Find all code blocks with mermaid language class
-      var codeBlocks = document.querySelectorAll('code.language-mermaid, pre code.language-mermaid');
+      // Find all code blocks - updated selectors for Jekyll/Rouge wrapping
+      // Jekyll wraps: <div class="language-mermaid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...</code></pre></div></div>
+      var codeBlocks = document.querySelectorAll('div.language-mermaid code, pre code.language-mermaid');
       
       codeBlocks.forEach(function(block) {
-        // Get the content
+        // Get the content - need to handle both div.language-mermaid code and pre code.language-mermaid
         var content;
         if (block.parentNode.tagName === 'PRE') {
+          content = block.textContent;
+        } else if (block.parentNode.classList && block.parentNode.classList.contains('language-mermaid')) {
+          // div.language-mermaid > code
           content = block.textContent;
         } else {
           content = block.textContent;
@@ -51,6 +79,9 @@
         
         // Replace the code block with the mermaid div
         if (block.parentNode.tagName === 'PRE') {
+          block.parentNode.replaceChild(mermaidDiv, block);
+        } else if (block.parentNode.classList && block.parentNode.classList.contains('language-mermaid')) {
+          // div.language-mermaid > code - replace the code element
           block.parentNode.replaceChild(mermaidDiv, block);
         } else {
           block.replaceWith(mermaidDiv);
