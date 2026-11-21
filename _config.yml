@@ -1,0 +1,20 @@
+# Site settings
+title: ICAO MRTD Personalization Complex
+email: ekatmoz88@gmail.com
+description: >-
+  Architecture and user specification for the ICAO MRTD Personalization Complex
+  — a hardware-software complex for plastic card and document personalization
+  with machine-readable zone (MRZ).
+
+# Theme settings
+remote_theme: pmarscei/jekyll-serif
+
+# Build settings
+markdown: kramdown
+
+# Default layout for all pages
+defaults:
+  - scope:
+      path: "" # root
+    values:
+      layout: default
