@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | default: site.title | default: 'ICAO MRTD Personalization Complex' }}</title>
+  <style>
+    /* Basic styling for markdown pages */
+    body {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      color: #2d3748;
+    }
+    .mermaid {
+      display: block;
+      margin: 20px auto;
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    {{ content }}
+  </div>
+
+  <!-- Mermaid.js v10 -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Find all code blocks with mermaid language class
+      var codeBlocks = document.querySelectorAll('code.language-mermaid, pre code.language-mermaid');
+      
+      codeBlocks.forEach(function(block) {
+        // Get the content
+        var content;
+        if (block.parentNode.tagName === 'PRE') {
+          content = block.textContent;
+        } else {
+          content = block.textContent;
+        }
+        
+        // Create a mermaid div
+        var mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid';
+        mermaidDiv.textContent = content;
+        
+        // Replace the code block with the mermaid div
+        if (block.parentNode.tagName === 'PRE') {
+          block.parentNode.replaceChild(mermaidDiv, block);
+        } else {
+          block.replaceWith(mermaidDiv);
+        }
+      });
+      
+      // Initialize Mermaid
+      mermaid.initialize({
+        startOnLoad: false,
+        elementSelector: '.mermaid',
+        theme: 'default'
+      });
+      
+      // Render mermaid diagrams
+      mermaid.run();
+    });
+  </script>
+</body>
+</html>
