@@ -1,7 +1,7 @@
 # ICAO MRTD Personalization Complex — Architectural and User Specification
 
 **Repository:** `ekatmoz88-alt/icao-mrtd-documentation`
-**Source:** Extracted from technical documentation on USB flash drive `/media/kate/B2F7-91F7`
+**Source:** Extracted from technical documentation on USB flash drive Sanitized project source archive
 **Status:** Draft — based exclusively on extracted source documents
 **Languages:** English / Russian
 **Anonymization:** All customer names, personal data, serial numbers, keys, and internal addresses replaced with placeholders.
@@ -38,7 +38,7 @@
 
 | Параметр | Значение |
 |---|---|
-| Операционная серверная ОС | ROSA Marathon 2012, 32-bit, файловая система ext4 |
+| Операционная серверная ОС | ROSA Marathon [Год / Year], 32-bit, файловая система ext4 |
 | Операционная ОС смарт-карт | «Магистра» (Magistral) |
 | Сервер приложений | JBoss AS 6.1 |
 | Среда исполнения | OpenJDK 1.6 |
@@ -49,7 +49,7 @@
 
 | Parameter | Value |
 |---|---|
-| Server OS | ROSA Marathon 2012, 32-bit, ext4 |
+| Server OS | ROSA Marathon [Год / Year], 32-bit, ext4 |
 | Smart card OS | Magistral |
 | Application server | JBoss AS 6.1 |
 | Runtime | OpenJDK 1.6 |
@@ -229,9 +229,9 @@ graph TD
 
 ### 6.1 Станция лазерной перфорации CardpasNet / CardpasNet Laser Perforation Station
 
-**RU:** Программное обеспечение для управления заданием на макете технологической установки лазерной перфорации (шифр НИР «ДИОПТР-2»). Интерфейс включает панели: Инструментов, Объектов, Свойств, Персонализации, Информации, Тестов, Направляющих, Порядка элементов.
+**RU:** Программное обеспечение для управления заданием на макете технологической установки лазерной перфорации. Интерфейс включает панели: Инструментов, Объектов, Свойств, Персонализации, Информации, Тестов, Направляющих, Порядка элементов.
 
-**EN:** Software for managing perforation station layout tasks (NIR project code «DIOPTR-2»). UI panels: Tools, Objects, Properties, Personalization, Info, Tests, Guides, Element Order.
+**EN:** Software for managing perforation station layout tasks. UI panels: Tools, Objects, Properties, Personalization, Info, Tests, Guides, Element Order.
 
 ### 6.2 Объекты персонализации / Personalization Objects
 
@@ -301,19 +301,9 @@ graph TD
 
 ## 9. Анонимизация / Anonymization
 
-**RU:** Все названия заказчиков, ФИО, серийные номера, ключи и внутренние адреса заменены на обобщённые обозначения:
+**RU:** Все названия заказчиков, ФИО, серийные номера, ключи и внутренние адреса заменены на обобщённые обозначения.
 
-- ЗАО «Научные Приборы» → [Организация-заказчик]
-- ФИО → [ФИО]
-- САНКТ-ПЕТЕРБУРГ → [Город]
-- Даты → [Дата]
-
-**EN:** All customer names, personal data, serial numbers, keys, and internal addresses replaced with placeholders:
-
-- ZAO «Nauchnye Pribory» → [Customer Organization]
-- ФИО → [Name]
-- САНКТ-ПЕТЕРБУРГ → [City]
-- Dates → [Date]
+**EN:** All customer names, personal data, serial numbers, keys, and internal addresses replaced with placeholders.
 
 ---
 
