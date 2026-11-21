@@ -5,53 +5,94 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title | default: site.title | default: 'ICAO MRTD Personalization Complex' }}</title>
   <style>
-    /* Basic styling for markdown pages */
+    /* Oracle Redwood palette */
+    :root {
+      --redwood-bg: #FBF9F8;
+      --redwood-header: #161513;
+      --redwood-card: #FFFFFF;
+      --redwood-accent: #C74634;
+      --redwood-line: #E5E2DF;
+      --redwood-muted: #6b6b6b;
+    }
+    
     body {
       max-width: 800px;
       margin: 0 auto;
       padding: 20px;
       font-family: system-ui, -apple-system, sans-serif;
       line-height: 1.6;
+      background: var(--redwood-bg);
+      color: var(--redwood-header);
     }
+    
     h1, h2, h3, h4, h5, h6 {
-      color: #2d3748;
+      color: var(--redwood-header);
     }
+    
     .mermaid {
       display: block;
       margin: 20px auto;
       max-width: 100%;
     }
-    /* Navigation panel styles */
+    
+    /* Redwood-style navigation panel */
     .nav-panel {
-      background: #f7fafc;
-      border: 1px solid #e2e8f0;
+      background: var(--redwood-header);
+      border: 1px solid var(--redwood-line);
       border-radius: 6px;
       padding: 12px 20px;
       margin-bottom: 24px;
       font-size: 0.875rem;
     }
+    
     .nav-panel a {
-      color: #2d3748;
+      color: var(--redwood-card);
       text-decoration: none;
       margin-right: 16px;
     }
+    
     .nav-panel a:hover {
       text-decoration: underline;
+    }
+    
+    .nav-panel a {
+      color: #FFFFFF;
+    }
+    
+    /* Back to dashboard button */
+    .back-to-dashboard {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--redwood-accent);
+      color: #FFFFFF;
+      border-radius: 6px;
+      font-size: 14px;
+      text-decoration: none;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+    
+    .back-to-dashboard:hover {
+      background: #A83526;
+      color: #FFFFFF;
     }
   </style>
 </head>
 <body>
+  <!-- Back to dashboard button -->
+  <a href="https://vercel.app" class="back-to-dashboard">← Back to Dashboard</a>
+  
   <!-- Navigation panel -->
   <div class="nav-panel">
     <a href="./">Главная ↗</a>
     <a href="SPECIFICATION.html">SPECIFICATION ↗</a>
     <a href="ARCHITECTURE_DIAGRAMS.html">Диаграммы ↗</a>
   </div>
-
+  
   <div class="content">
     {{ content }}
   </div>
-
+  
   <!-- Mermaid.js v10 -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <script>
