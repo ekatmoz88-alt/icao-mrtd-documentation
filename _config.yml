@@ -6,9 +6,6 @@ description: >-
   — a hardware-software complex for plastic card and document personalization
   with machine-readable zone (MRZ).
 
-# Theme settings
-remote_theme: pmarscei/jekyll-serif
-
 # Build settings
 markdown: kramdown
 
