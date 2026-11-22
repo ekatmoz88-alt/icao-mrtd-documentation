@@ -36,15 +36,57 @@
       text-rendering: optimizeLegibility;
     }
 
-    .content {
-      width: 100%;
-      max-width: none;
-      min-width: 0;
-      padding: 32px 40px 64px;
-      overflow-wrap: anywhere;
-      text-align: left;
+    .topbar {
+      position: sticky; z-index: 20; top: 0; height: 48px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+      padding: 0 28px; color: #fff; background: var(--blue);
+      box-shadow: 0 2px 5px rgba(0,0,0,.18);
     }
-
+    .brand { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 13px; font-weight: 600; }
+    .brand-mark {
+      display: grid; place-items: center; width: 32px; height: 32px;
+      border: 1px solid rgba(255,255,255,.35); border-radius: 8px;
+      font-size: 12px; font-weight: 750;
+    }
+    .top-links { display: flex; align-items: center; gap: 20px; }
+    .top-links a { color: #fff; font-size: 12px; }
+    .layout { display: grid; grid-template-columns: 240px minmax(0,1fr); min-height: calc(100vh - 48px); }
+    .sidebar {
+      position: sticky; top: 48px; align-self: start; height: calc(100vh - 48px);
+      overflow-y: auto; padding: 24px 16px 32px 20px;
+      border-right: 1px solid var(--line); background: #f5f7f8;
+    }
+    .side-label {
+      margin: 0 0 12px 10px; color: #98a2b3; font-size: 10px;
+      font-weight: 750; letter-spacing: .12em; text-transform: uppercase;
+    }
+    .side-group { margin: 0 0 6px; }
+    .side-group summary {
+      position: relative; display: block; padding: 7px 26px 7px 10px;
+      border-radius: var(--radius); color: #475467; cursor: pointer;
+      list-style: none; font-size: 12px; font-weight: 650; line-height: 1.45;
+    }
+    .side-group summary::-webkit-details-marker { display: none; }
+    .side-group summary:after {
+      content: ""; position: absolute; right: 12px; top: 10px;
+      width: 6px; height: 6px; border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor; transform: rotate(45deg);
+      transition: transform .15s ease;
+    }
+    .side-group[open] summary:after { top: 13px; transform: rotate(225deg); }
+    .side-group summary:hover { background: #eceff1; color: var(--ink); }
+    .side-nav { display: grid; gap: 3px; padding: 3px 0 8px 10px; }
+    .side-nav a {
+      display: block; padding: 7px 10px; border-radius: var(--radius);
+      color: #475467; font-size: 12px; line-height: 1.45;
+    }
+    .side-nav a:hover { background: #eceff1; color: var(--ink); text-decoration: none; }
+    .side-nav .sub-link { padding-left: 20px; color: #667085; font-size: 11px; }
+    .side-divider { height: 1px; margin: 20px 4px; background: var(--line); }
+    .content {
+      width: 100%; max-width: none; min-width: 0;
+      padding: 32px 40px 64px; overflow-wrap: anywhere; text-align: left;
+    }
     h1, h2, h3, h4, h5, h6 {
       margin-top: 0;
       color: var(--ink);
@@ -248,21 +290,31 @@
       height: auto;
     }
 
-    @media (max-width: 760px) {
-      body { padding: 0; }
+    @media (max-width: 900px) {
       .content { padding: 28px 24px 56px; }
-      .nav-panel { gap: 8px 14px; }
+    }
+    @media (max-width: 680px) {
+      .topbar { padding: 0 16px; }
+      .top-links { gap: 12px; }
+      .top-links a { font-size: 11px; }
+      .layout { display: block; }
+      .sidebar {
+        position: static; height: auto; padding: 10px 14px;
+        border-right: 0; border-bottom: 1px solid var(--line);
+      }
+      .side-label, .side-divider { display: none; }
+      .side-group { display: inline-block; vertical-align: top; min-width: 180px; }
+      .side-group summary { padding: 7px 26px 7px 9px; }
+      .side-group .side-nav { padding: 3px 0 8px; }
+      .content { padding: 34px 18px 54px; }
       table { display: block; overflow-x: auto; }
       th, td { padding: 9px 10px; }
-      .content { overflow-wrap: anywhere; }
     }
-
-    @media (max-width: 520px) {
-      body { padding: 0; }
-      .content { padding: 34px 18px 54px; }
-      h2 { margin-top: 36px; }
-      pre { padding: 12px; }
-      .nav-panel { align-items: flex-start; flex-direction: column; }
+    @media (max-width: 390px) {
+      .brand { font-size: 11px; }
+      .brand-mark { width: 28px; height: 28px; }
+      .top-links a:first-child { display: none; }
+      .side-group { min-width: 145px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -277,22 +329,59 @@
   </style>
 </head>
 <body>
-  <!-- Back to dashboard button -->
-  <a href="https://vercel.app" class="back-to-dashboard">← Back to Dashboard</a>
-  
-  <!-- Navigation panel -->
-  <div class="nav-panel">
-    <a href="./">Главная ↗</a>
-    <a href="SPECIFICATION.html">SPECIFICATION ↗</a>
-    <a href="ARCHITECTURE_DIAGRAMS.html">Диаграммы ↗</a>
-  </div>
-  
-  <div class="content">
-    {{ content }}
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="ICAO MRTD documentation home">
+      <span class="brand-mark">MRTD</span>
+      <span>ICAO MRTD Documentation</span>
+    </a>
+    <nav class="top-links" aria-label="Project links">
+      <a href="https://github.com/ekatmoz88-alt/icao-mrtd-documentation" target="_blank" rel="noopener noreferrer">GitHub repository ↗</a>
+      <a href="https://github.com/ekatmoz88-alt" target="_blank" rel="noopener noreferrer">GitHub profile ↗</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="Documentation navigation">
+      <p class="side-label">Documentation</p>
+      <details class="side-group" open>
+        <summary>Project</summary>
+        <nav class="side-nav" aria-label="Project pages">
+          <a href="./">Главная</a>
+          <a href="SPECIFICATION.html">Спецификация</a>
+          <a href="ARCHITECTURE_DIAGRAMS.html">Архитектурные диаграммы</a>
+        </nav>
+      </details>
+      <div class="side-divider"></div>
+      <p class="side-label">On this page</p>
+      <details class="side-group" open>
+        <summary>Разделы документа</summary>
+        <nav class="side-nav" id="page-toc" aria-label="Sections on this page"></nav>
+      </details>
+    </aside>
+
+    <main class="content">
+      {{ content }}
+    </main>
   </div>
   
   <!-- Mermaid.js v10 -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var toc = document.getElementById('page-toc');
+      var headings = document.querySelectorAll('.content h2, .content h3');
+      headings.forEach(function(heading, index) {
+        if (!heading.id) {
+          heading.id = 'section-' + (index + 1);
+        }
+        var link = document.createElement('a');
+        link.href = '#' + heading.id;
+        link.textContent = heading.textContent.trim();
+        if (heading.tagName === 'H3') link.className = 'sub-link';
+        toc.appendChild(link);
+      });
+    });
+  </script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Find all code blocks - updated selectors for Jekyll/Rouge wrapping
